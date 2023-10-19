@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.org/dtd/hibernate-reverse-engineering-3.0.dtd" >
+
+<hibernate-reverse-engineering>
+	<table-filter match-schema="public" match-name="account" />
+	<table-filter match-schema="public" match-name="address" />
+	<table-filter match-schema="public" match-name="customer" />
+	<table-filter match-schema="public" match-name="phone" />
+	<table-filter match-name="command_executer" match-schema="public"></table-filter>
+	<table schema="public" name="account">
+		<column name="account_id"></column>
+		<column name="customer_id"></column>
+		<column name="account_currency"></column>
+		<column name="account_type"></column>
+		<column name="balance"></column>
+	</table>
+	<table schema="public" name="address">
+		<column name="address_id"></column>
+		<column name="city"></column>
+		<column name="customer_id"></column>
+		<column name="postal_code"></column>
+		<column name="adress_type"></column>
+		<column name="street_address"></column>
+		<column name="state"></column>
+	</table>
+	<table schema="public" name="command_executer">
+		<column name="command_id"></column>
+		<column name="command_name"></column>
+		<column name="method"></column>
+		<column name="class_name"></column>
+	</table>
+	<table schema="public" name="customer">
+		<column name="customer_id"></column>
+		<column name="first_name"></column>
+		<column name="last_name"></column>
+		<column name="gender"></column>
+		<column name="tax_no"></column>
+		<column name="birth_date"></column>
+		<column name="pid_no"></column>
+		<column name="status"></column>
+	</table>
+	<table schema="public" name="phone">
+		<column name="phone_id"></column>
+		<column name="customer_id"></column>
+		<column name="phone_number"></column>
+		<column name="phone_type"></column>
+	</table>
+</hibernate-reverse-engineering>
