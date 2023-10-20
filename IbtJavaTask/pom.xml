@@ -34,5 +34,17 @@
         <artifactId>postgresql</artifactId>
         <version>42.6.0</version>
     </dependency>
+    
+    <!-- Logback Dependency to format Hibernate logs -->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+            <version>1.4.11</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.4.11</version>
+        </dependency>
   </dependencies> 
 </project>

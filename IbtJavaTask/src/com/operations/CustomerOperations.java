@@ -1,16 +1,29 @@
 package com.operations;
 
+import java.util.List;
+
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.cfg.Configuration;
 
-public class CustomerOperations
+import com.model.Customer;
+
+public class CustomerOperations<T>
 {
   private Session session;
   
   public CustomerOperations() {
 	  
     session = new Configuration().configure().buildSessionFactory().openSession();
+  }
+  
+  
+  private List<Customer> CustomerGet(){
+	  
+	  List<Customer> resultObj = session.createQuery("FROM Customer",Customer.class).getResultList();
+	  
+	  return resultObj;
+	  
   }
   
 

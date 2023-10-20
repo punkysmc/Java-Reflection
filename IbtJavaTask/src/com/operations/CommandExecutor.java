@@ -2,8 +2,14 @@ package com.operations;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.hibernate.Session;
 import org.hibernate.cfg.Configuration;
+
+import com.model.Customer;
 
 public class CommandExecutor {
   private Session session;
@@ -14,7 +20,7 @@ public class CommandExecutor {
   }
   
 
-  public String[] GetClassAndMethodFromDB(String commandName) {
+  private String[] GetClassAndMethodFromDB(String commandName) {
 	  
     String query = "SELECT CLASS_NAME, METHOD FROM COMMAND_EXECUTER WHERE COMMAND_NAME = :COMMAND_NAME";
     
@@ -38,7 +44,7 @@ public class CommandExecutor {
     
     Class<?> clazz = Class.forName(className);
     
-    Method myMethod = clazz.getDeclaredMethod(method);
+    Method myMethod = clazz.getDeclaredMethod(method, Object.class);
     myMethod.setAccessible(true);
     
     Object instance = clazz.getDeclaredConstructor().newInstance();
@@ -47,4 +53,31 @@ public class CommandExecutor {
     
     return result;
   }
+  
+  public Map<?,?> GetCommand(String commandName) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+	  
+	  String[] classAndMethod = GetClassAndMethodFromDB(commandName);
+	    
+	  String className = classAndMethod[0];
+	  String method = classAndMethod[1];
+	    
+	  Class<?> clazz = Class.forName(className);
+	    
+	  Method myMethod = clazz.getDeclaredMethod(method);
+	  myMethod.setAccessible(true);
+	    
+	  Object instance = clazz.getDeclaredConstructor().newInstance();
+	    
+	  List<Object> resultList = (List<Object>) myMethod.invoke(instance);
+	    
+	  Map<Integer,Object> resultMap = new HashMap<>();
+	    
+	  for (int i = 0; i < resultList.size(); i++) {	  
+		  
+		  resultMap.put(i, resultList.get(i));
+	  }
+	    
+	    return resultMap;
+  }
+  
 }
